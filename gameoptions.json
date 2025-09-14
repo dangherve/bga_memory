@@ -1,0 +1,101 @@
+{
+  "100": {
+    "name": "Type card used",
+    "values": {
+      "1": {
+        "name": "Tarot game"
+      },
+      "2": {
+        "name": "Canadian region flag"
+      },
+      "3": {
+        "name": "Europe country flag"
+      },
+      "4": {
+        "name": "Shokoba Game"
+      }
+    }
+  },
+
+  "101": {
+    "name": "Type Game",
+    "values": {
+      "2": {
+        "name": "Standard"
+      },
+      "1": {
+        "name": "association"
+      }
+    },
+    "startcondition": {
+        "2": [],
+        "1": [
+            {
+                "type": "otheroptionisnot",
+                "id": 100,
+                "message": "association is not possible with shokoba game",
+                "value": 4
+            }
+        ]
+    }
+  },
+
+  "110": {
+    "name": "Number of cards",
+    "values": {
+      "6 ": {
+        "name": "6 (short game)"
+      },
+      "14": {
+        "name": "14 (one full color)"
+      },
+      "28": {
+        "name": "28 (two full color)"
+      },
+      "42": {
+        "name": "42 (three full color)"
+      },
+      "56": {
+        "name": "56 (four full color)"
+      },
+      "78": {
+        "name": "78 (full game)"
+      }
+    },
+    "displaycondition": [
+      {
+        "type": "otheroption",
+        "id": 100,
+        "value": 1
+      },
+      {
+        "type": "otheroption",
+        "id": 101,
+        "value": 2
+      }
+    ]
+  },
+  "111": {
+    "name": "Number of pair",
+    "values": {
+      "14": {
+        "name": "2 colors"
+      },
+      "28": {
+        "name": "4 colors"
+      }
+    },
+    "displaycondition": [
+      {
+        "type": "otheroption",
+        "id": 100,
+        "value": 1
+      },
+      {
+        "type": "otheroption",
+        "id": 101,
+        "value": 1
+      }
+    ]
+  }
+}

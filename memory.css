@@ -1,0 +1,224 @@
+/**
+ *------
+ * BGA framework: Gregory Isabelli & Emmanuel Colin & BoardGameArena
+ * memory implementation : © <Herve Dang> <dang.herve@gmail.com
+ *
+ * This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
+ * See http://en.boardgamearena.com/#!doc/Studio for more information.
+ * -----
+ *
+ * memory.css
+ *
+ * memory stylesheet
+ *
+ */
+
+/*
+    This is the CSS stylesheet of your game User Interface.
+
+    Styles defined on this file will be applied to the HTML elements you define in your
+    HTML template (memory_memory.tpl), and to HTML elements you create dynamically
+    (in memory.js).
+
+    Usually, you are using CSS to:
+
+    1°) define the overall layout of your game
+        (ex: place the board on the top left, place player's hand beside, place the deck on the right, ...).
+
+    2°) create your CSS-sprites:
+        All images of your games should be gathered into a small number of image files. Then, using
+        background-image and background-position CSS properties, you create HTML blocks that can
+        display these images correctly (see example below).
+
+    3°) ... anything else:
+        It is really easy to add and remove CSS classes dynamically from your Javascript with
+        dojo.addClass and dojo.removeClass. It is also easy to check if an element has a class
+        (dojo.hasClass) or to get all elements with a specific class (dojo.query). This is why,
+        very often, using CSS classes for the logic of your user interface allow you to do complex
+        thing easily.
+
+
+     Note: on the production platform, this file will be compressed and comments will be removed.
+           Consequently, don't hesitate to put as many comments as necessary.
+*/
+
+/* Note: you must not use any @import directive */
+
+.card {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.textCard {
+  width: 200px;               /* REQUIRED constraint */
+  height: 100px;
+  min-height: 50px;
+
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  display: flex;
+  align-items: center;        /* vertical center */
+  justify-content: center;    /* horizontal center */
+  text-align: center;
+
+  box-sizing: border-box;
+}
+
+.textCardHelp {
+  width: 100px;               /* REQUIRED constraint */
+  height: 50px;
+
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  display: flex;
+  align-items: center;        /* vertical center */
+  justify-content: center;    /* horizontal center */
+  text-align: center;
+
+
+  box-sizing: border-box;
+}
+
+.card_container{
+    position: absolute;
+    cursor: pointer;
+}
+
+place {
+    position: absolute;
+}
+
+#map_surface {
+    position: absolute;
+    top: 0px;
+    left: 0%;
+    height: 100%;
+    cursor: move;
+}
+
+#map_container {
+    position: relative;
+    left: 0%;
+    height: 800px;
+    overflow: hidden;
+
+}
+
+.map_container{
+    width: 100%;
+}
+
+.map_container_reduce{
+    width: calc(100% - 480px);
+/*    border: 1px solid red;*/
+}
+
+
+#flag {
+    border: 1px solid blue;
+    width: 95%;
+}
+
+
+
+#flagOLD {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 440px;
+    height: 440px;
+    display: block;
+/*    border: 1px solid blue;*/
+
+}
+
+#map_scrollable, #map_scrollable_oversurface {
+    position: absolute;
+}
+
+#map_container {
+    margin: auto;
+
+}
+
+#map_container .tarot {
+    border-radius: 4%;
+    top: 0px;
+    left: 0px;
+    width: 70px;
+    height: 129px;
+}
+#map_container .europe,
+#map_container .canada {
+    border-radius: 4%;
+    top: 0px;
+    left: 0px;
+    width: 200px;
+    height: 100px;
+}
+
+#flag .europeHelp,
+#flag .canadaHelp{
+    border-radius: 4%;
+    top: 1px;
+    left: 1px;
+    width: 100px;
+    height: 50px;
+}
+
+#map_container .shokoba {
+    border-radius: 4%;
+    top: 0px;
+    left: 0px;
+    width: 250px;
+    height: 250px;
+}
+
+/* Position the "next button" to the right */
+.next {
+
+    right: 5%;
+    border-radius: 3px 0 0 3px;
+
+}
+
+
+/* Next & previous buttons */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top:30px;
+}
+
+.tarot {
+    background-image: url('img/cards.png');
+}
+
+.canada {
+    background-image: url('img/canada.png');
+}
+
+.canadaHelp {
+    background-image: url('img/canada_help.png');
+}
+
+.europe {
+    background-image: url('img/europe.png');
+}
+
+.europeHelp {
+    background-image: url('img/europe_help.png');
+}
+
+.shokoba {
+    background-image: url('img/shokoba.png');
+}
+
+

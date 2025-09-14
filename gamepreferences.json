@@ -1,0 +1,70 @@
+{
+ "100": {
+    "name": "Number of card in one row",
+    "needReload": true,
+    "values": {
+      "4": {
+        "name": "4"
+      },
+      "5": {
+        "name": "5"
+      },
+      "6": {
+        "name": "6"
+      },
+      "7": {
+        "name": "7"
+      },
+      "8": {
+        "name": "8"
+      },
+      "10": {
+        "name": "10"
+      },
+      "12": {
+        "name": "12"
+      }
+    },
+    "default": 8
+  },
+   "101": {
+    "name": "auto Confirm",
+    "needReload": false,
+    "values": {
+      "1": {
+        "name": "yes"
+      },
+      "0": {
+        "name": "no"
+      }
+    },
+    "default": 0
+  },
+    "102": {
+    "name": "Text language (for association only)",
+    "needReload": true,
+    "values": {
+      "1": {
+        "name": "English"
+      },
+      "2": {
+        "name": "French"
+      }
+    },
+    "default": 1
+  },
+    "103": {
+    "name": "Show memory help",
+    "needReload": true,
+    "values": {
+      "1": {
+        "name": "yes"
+      },
+      "0": {
+        "name": "no"
+      }
+    },
+    "default": 1
+  }
+
+}

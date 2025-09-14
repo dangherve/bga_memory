@@ -1,0 +1,17 @@
+{
+  "table": {
+    "turns_number": {
+      "id": 10,
+      "name": "Number of turns",
+      "type": "int"
+    }
+  },
+  "player": {
+      "nbPair": {
+      "id": 10,
+      "name": "number of pair reveal",
+      "type": "int"
+    }
+  }
+}
+
