@@ -16,13 +16,13 @@
  */
 
 let index =0
-let maxLigne=0
+let maxGroup=0
 function showSlides (n) {
     elements=document.getElementsByClassName('groupe'+index)
     for(i=0;i<elements.length;i++){
         elements[i].style.display='none'
     }
-    index=((index+n)%(maxLigne+1)+(maxLigne+1))%(maxLigne+1)
+    index=((index+n)%(maxGroup)+(maxGroup))%(maxGroup)
     elements=document.getElementsByClassName('groupe'+index)
     for(i=0;i<elements.length;i++){
         elements[i].style.display='flex'
@@ -102,179 +102,123 @@ function (dojo, declare) {
         */
 
 
+        createHelp: function (nbCard,className,maxLine,maxSize){
+
+            size=document.getElementById('maintitlebar_content').scrollWidth-25*2
+            linePosition=0
+            line=0
+            flag=''
+            flagCount=1
+            first=true
+            slideshow=false
+            for (i =0;i<nbCard;i++){
+                for (j =0;j<2 ;j++){
+                    tpl = {};
+                    tpl.card_id="flag_help"+(2*i+j);
+                    if((maxSize*(flagCount))>size){
+
+                        linePosition=0;
+                        line++;
+                        if (line >= maxLine){
+                            maxGroup++
+                            line=0
+                            slideshow=true
+                        }
+                        flagCount=1
+                    }
+
+                   if( maxGroup!=0)
+                        first=false
+
+                    if (first || !slideshow){
+                        tpl.displayOpt=""
+                    }else
+                        tpl.displayOpt="display:none"
+
+                    tpl.cardGame=className;
+                    tpl.color='none'
+                    tpl.borderSize=0
+                    tpl.backx=100*i;
+
+                    tpl.left=(110*(linePosition))+35;
+
+                    tpl.top=60*(line)+10;
+                    linePosition++;
+                    tpl.class="groupe"+maxGroup //slideshow
+
+                    if(j == 1){
+                        tpl.text=this.flag[i].tr_name
+                        tpl.textClass="textCardHelp";
+                        flag+=jstpl_text(tpl)
+                    }else{
+                        tpl.backy=50*j
+                        flag+=jstpl_card(tpl)
+                    }
+                }
+                flagCount++
+            }
+
+            if (slideshow){
+                elements=document.getElementsByClassName('groupe0')
+                for(i=0;i<elements.length;i++){
+                    elements[i].style.display='flex'
+                }
+                flagHeight=60*(maxLine)
+                console.log("flagHeight:"+flagHeight)
+                addOn+='<div id="flag" style="height:'+flagHeight+'px" class="whiteblock">'
+                addOn+='<a class="prev" onclick="showSlides(-1)">&#10094;</a>'
+                addOn+=flag
+                addOn+='<a class="next" onclick="showSlides(1)">&#10095;</a>'
+                addOn+='</div>'
+            }else{
+                console.log("line:"+line)
+
+                maxGroup=line+1
+                console.log("maxGroup:"+maxGroup)
+
+                flagHeight=60*(maxGroup)
+                console.log("flagHeight:"+flagHeight)
+
+                addOn='<div id="flag" style="height:'+flagHeight+'px" class="whiteblock">'+flag+'</div>'
+            }
+            maxGroup++
+            return addOn;
+        },
 
         initiateTemplate: function(templateType){
+            var maxSize;
+            var maxLine=3
 
-            switch (templateType){
+            maxSize=220;
+
+            //usefull only with 102 ==1
+            switch(this.prefs[103].value){
                 case "1":
-                    //canada
-                    if(this.prefs[102].value == "1") {
-                        template="map_container"
-                        addOn=''
-
-                        if(document.documentElement.clientWidth<1000){
-                            size=document.documentElement.clientWidth;
-                            maxSize=120
-                            slideshow=true
-                        }else{
-                            size=document.documentElement.clientWidth-240;
-                            maxSize=220
-                            slideshow=false
-                        }
-
-                        k=0
-                        l=0
-                        m=1
-                        flag=''
-                        first=true
-                        for (i =0;i<13;i++){
-                            for (j =0;j<2 ;j++){
-                                tpl = {};
-                                tpl.card_id="flag_help"+(2*i+j);
-
-                                if((maxSize*(m+1))>size){
-                                    first=false
-                                    k=0;
-                                    maxLigne++;
-                                    m=1;
-                                    l=l+1;
-                                }
-
-                                if (first || !slideshow){
-                                    tpl.displayOpt=""
-                                }else
-                                    tpl.displayOpt="display:none"
-
-                                tpl.cardGame="canadaHelp";
-                                tpl.color='none'
-                                tpl.borderSize=0
-                                tpl.backx=100*i;
-
-
-                                tpl.left=(110*(k))+50;
-
-                                if (slideshow)
-                                    tpl.top=10;
-                                else
-                                    tpl.top=60*(l)+10;
-                                k++;
-                                if (slideshow)
-                                    tpl.class="groupe"+maxLigne //slideshow
-                                else
-                                    tpl.class=""
-
-
-                                if(j == 1){
-                                    tpl.text=this.flag[i].tr_name
-                                    tpl.textClass="textCardHelp";
-                                    flag+=jstpl_text(tpl)
-                                }else{
-                                    tpl.backy=50*j
-                                    flag+=jstpl_card(tpl)
-                                }
-                            }
-                            m++
-                        }
-                        if (slideshow){
-                            elements=document.getElementsByClassName('groupe0')
-                            for(i=0;i<elements.length;i++){
-                                elements[i].style.display='flex'
-                            }
-                            flagHeight=60
-                            addOn+='<div id="flag" style="height:'+flagHeight+'px" class="whiteblock">'
-                            addOn+='<a class="prev" onclick="showSlides(-1)">&#10094;</a>'
-                            addOn+=flag
-                            addOn+='<a class="next" onclick="showSlides(1)">&#10095;</a>'
-                            addOn+='</div>'
-                        }else{
-                            flagHeight=60*(maxLigne+1)
-                            addOn='<div id="flag" style="height:'+flagHeight+'px" class="whiteblock">'+flag+'</div>'
-                        }
-
-                    }else{
-                        template="map_container "
-                        addOn=""
-                    }
+                    maxLine=1
                     break;
                 case "2":
-                    //europe
-                    if(this.prefs[102].value == "1") {
-                        template="map_container"
-                        addOn=''
-
-                        if(document.documentElement.clientWidth<1000){
-                            size=document.documentElement.clientWidth;
-                            maxSize=120
-                        }else{
-                            size=document.documentElement.clientWidth-240;
-                            maxSize=220
-                        }
-                        k=0
-                        l=0
-                        m=1
-                        flag=''
-                        addOn=''
-                        first=true
-                        for (i =0;i<27;i++){
-                            for (j =0;j<2 ;j++){
-                                tpl = {};
-                                tpl.card_id="flag_help"+(2*i+j);
-
-                                if((maxSize*(m+1))>size){
-                                    first=false
-                                    k=0;
-                                    maxLigne++;
-                                    m=1
-                                }
-
-                                if (first){
-                                    tpl.displayOpt=""
-                                }else
-                                    tpl.displayOpt="display:none"
-
-                                tpl.cardGame="europeHelp";
-                                tpl.color='none'
-                                tpl.borderSize=0
-                                tpl.backx=100*i;
-
-
-                                tpl.left=(110*(k))+50;
-                                tpl.top=10;
-
-                                k++;
-                                tpl.class="groupe"+maxLigne //slideshow
-
-                                if(j == 1){
-                                    tpl.text=this.flag[i].tr_name
-                                    tpl.textClass="textCardHelp";
-                                    flag+=jstpl_text(tpl)
-                                }else{
-                                    tpl.backy=50*j
-                                    flag+=jstpl_card(tpl)
-                                }
-                            }
-                            m++
-                        }
-
-                        elements=document.getElementsByClassName('groupe0')
-                        for(i=0;i<elements.length;i++){
-                            elements[i].style.display='block'
-                        }
-                        flagHeight=60
-                        addOn+='<div id="flag" style="height:'+flagHeight+'px" class="whiteblock">'
-                        addOn+='<a class="prev" onclick="showSlides(-1)">&#10094;</a>'
-                        addOn+=flag
-                        addOn+='<a class="next" onclick="showSlides(1)">&#10095;</a>'
-                        addOn+='</div>'
-                    }else{
-                        template="map_container "
-                        addOn=""
-                    }
+                    maxLine=99;
                     break;
                 default:
-                    template="map_container "
-                    addOn=""
                     break;
+
+            }
+            template="map_container "
+            addOn=""
+
+            if(this.prefs[102].value == "1") {
+
+                switch (templateType){
+                    case "1":
+                        //canada
+                        addon=this.createHelp(13,"canadaHelp",maxLine,maxSize)
+                        break;
+
+                    case "2":
+                        //europe
+                        addon=this.createHelp(27,"europeHelp",maxLine,maxSize)
+                        break;
+                }
             }
 
             document.getElementById('game_play_area').insertAdjacentHTML('beforeend', `

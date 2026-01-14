@@ -122,14 +122,14 @@ place {
 
 
 #flag {
-    border: 1px solid blue;
-    width: 95%;
+    position: relative
 }
 
-
+#flag *{
+    position: absolute;
+}
 
 #flagOLD {
-    position: absolute;
     top: 0px;
     right: 0px;
     width: 440px;
@@ -183,8 +183,7 @@ place {
 
 /* Position the "next button" to the right */
 .next {
-
-    right: 5%;
+    right: 25px;
     border-radius: 3px 0 0 3px;
 
 }
@@ -193,7 +192,6 @@ place {
 /* Next & previous buttons */
 .prev, .next {
     cursor: pointer;
-    position: absolute;
     top:30px;
 }
 
